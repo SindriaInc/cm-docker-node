@@ -1,6 +1,6 @@
 # Configuration Management - Docker Node
 
-cm-docker-node is a configuration management for docker nodes.
+IaC configuration management component for docker nodes.
 
 ## Setup Development Environment
 
