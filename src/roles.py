@@ -37,6 +37,7 @@ def main():
       subprocess.call(['git', 'clone', url + role + '.git', 'roles/' + role])
       print("Cleaning " + role + "...")
       subprocess.call(['rm', '-Rf', 'roles/' + role + '/.git'])
+      subprocess.call(['rm', '-Rf', 'roles/' + role + '/.gitignore'])
       subprocess.call(['rm', '-Rf', 'roles/' + role + '/.env.local'])
       subprocess.call(['rm', '-Rf', 'roles/' + role + '/docker-compose.local.yml'])
 

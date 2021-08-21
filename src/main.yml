@@ -4,7 +4,7 @@
 
   vars:
     users_list:
-      - username: ubuntu
+      - username: @@IAC_REMOTE_USER@@
         groups: [ "sudo","docker" ]
 
   roles:
