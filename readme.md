@@ -14,17 +14,20 @@ List of required envs. This envs will be set on your pipeline variables or in yo
 | AWS_ACCESS_KEY_ID         | <access-key>                  |
 | AWS_SECRET_ACCESS_KEY     | <secret-key>                  |
 | AWS_DEFAULT_REGION        | eu-central-1                  |
-| IAC_MODE                  | <mode>                        |
+| IAC_MODE                  | standalone or void            |
 | IAC_GIT_USERNAME          | <service-account-username>    |
 | IAC_GIT_PASSWORD          | <service-account-username>    |
-| IAC_GIT_PROVIDER          | <provider-fqdn>               |
-| IAC_GIT_NAMESPACE         | <repo-namespace>              |
-| IAC_INFRA_NAME            | <repo-slug>                   |
-| IAC_LIVE_CACHE            | <bucket-name>                 |
-| IAC_CURRENT_INFRA         | <bucket-name>                 |
-| BLUEPRINT_NAME            | <resource-name>               |
-| BLUEPRINT_REFER           | <blueprint-name>              |
-| BLUEPRINT_TYPE            | <resource-type>               |
+| IAC_GIT_PROVIDER          | provider-fqdn                 |
+| IAC_GIT_NAMESPACE         | repo-namespace                |
+| IAC_INFRA_NAME            | repo-slug                     |
+| IAC_LIVE_CACHE            | bucket-name                   |
+| IAC_CURRENT_INFRA         | bucket-name                   |
+| IAC_INVENTORY_REMOTE      | s3 or git                     |
+| IAC_INVENTORY_CACHE       | bucket-name or repo-slug      |
+| IAC_PRIVATE_KEY           | base64                        |
+| IAC_INVENTORY_NAME        | hosts                         |
+| IAC_REMOTE_USER           | ubuntu                        |
+| HOST                      | ip-address                    |
 
 
 ## Usage
