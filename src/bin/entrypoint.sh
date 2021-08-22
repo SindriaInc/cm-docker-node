@@ -80,8 +80,6 @@ else
   fi
 fi
 
-
-
 # Dry run playboook
 #ansible-playbook main.yml --check
 
