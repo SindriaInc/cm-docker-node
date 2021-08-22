@@ -54,31 +54,33 @@ else
   # Cleanup config directory
   rm -Rf /var/www/app/config
   mkdir -p /var/www/app/config
+
   # Infra setup
   mkdir -p .setup
   cd .setup
   git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/${IAC_INFRA_NAME}.git
   cp ${IAC_INFRA_NAME}/config/* ../config
+
+  # Init inventory
+  rm -Rf /var/www/app/inventory
+  mkdir -p /var/www/app/inventory
+
+  if [ "${IAC_INVENTORY_REMOTE}" == "git" ]; then
+    # Inventory cache
+    mkdir -p .cache
+    cd .cache
+    git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/${IAC_INVENTORY_CACHE}.git
+    cp ${IAC_INVENTORY_CACHE}/* ../inventory
+  elif [ "${IAC_INVENTORY_REMOTE}" == "s3" ]; then
+    # Sync inventory - Dowload
+    aws s3 sync s3://${IAC_INVENTORY_CACHE} ./inventory
+  else
+    echo -e "${RED}IAC_INVENTORY_REMOTE_TYPE env value unsupported, abort${NC}"
+    exit 1
+  fi
 fi
 
-# Init inventory
-rm -Rf /var/www/app/inventory
-mkdir -p /var/www/app/inventory
 
-
-if [ "${IAC_INVENTORY_REMOTE}" == "git" ]; then
-  # Inventory cache
-  mkdir -p .cache
-  cd .cache
-  git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/${IAC_INVENTORY_CACHE}.git
-  cp ${IAC_INVENTORY_CACHE}/* ../inventory
-elif [ "${IAC_INVENTORY_REMOTE}" == "s3" ]; then
-  # Sync inventory - Dowload
-  aws s3 sync s3://${IAC_INVENTORY_CACHE} ./inventory
-else
-  echo -e "${RED}IAC_INVENTORY_REMOTE_TYPE env value unsupported, abort${NC}"
-  exit 1
-fi
 
 # Dry run playboook
 #ansible-playbook main.yml --check
