@@ -11,7 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Dependencies
-        run: python3 roles.py
+        run: |
+          cd src
+          python3 roles.py
       - uses: actions/upload-artifact@v2
         with:
           name: roles
