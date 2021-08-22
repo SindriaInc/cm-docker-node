@@ -6,19 +6,6 @@ on:
       - '*'
 
 jobs:
-  build_dependencies:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build Dependencies
-        run: |
-          cd src
-          python3 roles.py
-      - uses: actions/upload-artifact@v2
-        with:
-          name: roles
-          path: src/roles/
-
   build_publish:
     runs-on: ubuntu-latest
     steps:
@@ -27,6 +14,11 @@ jobs:
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - name: Set env slug
       run: echo "REPO_SLUG=cm-docker-node" >> $GITHUB_ENV
+    - name: Build Dependencies
+      run: |
+          cd src
+          python3 roles.py
+          cd ..
     - name: Build Image
       env:
         DOCKERHUB_NAMESPACE: ${{ secrets.DOCKERHUB_NAMESPACE }}
