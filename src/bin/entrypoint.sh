@@ -83,7 +83,7 @@ else
 fi
 
 # Debug
-la -la
+ls -la
 pwd
 
 # Dry run playboook
