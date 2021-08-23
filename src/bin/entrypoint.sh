@@ -82,10 +82,6 @@ else
   fi
 fi
 
-# Debug
-ls -la
-pwd
-
 # Dry run playboook
 #ansible-playbook main.yml --check
 
