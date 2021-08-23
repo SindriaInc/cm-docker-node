@@ -60,6 +60,7 @@ else
   cd .setup
   git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/${IAC_INFRA_NAME}.git
   cp ${IAC_INFRA_NAME}/config/* ../config
+  cd ..
 
   # Init inventory
   rm -Rf /var/www/app/inventory
@@ -71,6 +72,7 @@ else
     cd .cache
     git clone https://${IAC_GIT_USERNAME}:${IAC_GIT_PASSWORD}@${IAC_GIT_PROVIDER}/${IAC_GIT_NAMESPACE}/${IAC_INVENTORY_CACHE}.git
     cp ${IAC_INVENTORY_CACHE}/* ../inventory
+    cd ..
   elif [ "${IAC_INVENTORY_REMOTE}" == "s3" ]; then
     # Sync inventory - Dowload
     aws s3 sync s3://${IAC_INVENTORY_CACHE} ./inventory
@@ -79,6 +81,10 @@ else
     exit 1
   fi
 fi
+
+# Debug
+la -la
+pwd
 
 # Dry run playboook
 #ansible-playbook main.yml --check
